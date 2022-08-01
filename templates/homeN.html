@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>BiCandi</title>
+<link rel="stylesheet" href={{ url_for('static', filename='css/home.css') }} />
+<link rel="stylesheet" href={{ url_for('static', filename='css/produtos.css') }} />
+<link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css') }} />
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src={{ url_for('static', filename='js/produtos.js') }}></script>
+
+</head>
+<body>
+<div id="title">
+	<form>
+		<input id="searchBox"  type="text" name="searchQuery">
+		<input id="searchButton"  type="submit" value="Buscar">
+	</form>
+
+	{% if not loggedIn %}
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Login</a>
+	</div>
+	{% else %}
+	<div class="dropdown">
+		<button class="dropbtn">Alô, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Seu Pedido</a>
+			<a href="/account/profile">Seu Cadastro</a>
+			<hr>
+			<a href="/logout">Sair</a>
+		</div>
+	</div>
+	{% endif %}
+	<div id="kart">
+		<a class="link" href="/cart">
+			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+			CART {{noOfItems}}
+		</a>
+	</div>
+</div>
+<div class="display">
+	<div class="displayCategory">
+		<h2>Filtra por Categoria: </h2>
+		<ul>
+			{% for row in categoryData %}
+			<li><a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="container">
+		<div class="heading">
+			<h1>
+			  <span >BiCandi</span> Catálogo de Produtos
+			</h1>
+	  </div>
+	  <div class="cart transition is-open">
+
+		<div class="table">
+		  <div class="layout-inline row th">
+			<div class="col col-pro">Produto</div>
+			<div class="col col-price align-center ">Preco</div>
+			<div class="col col-qty align-center">QTD</div>
+			<div class="col"> </div>
+		  </div>
+		  {% for data in itemData %}
+			  {% for row in data %}
+				  <div class="layout-inline row">
+					<div class="col col-pro layout-inline">
+					  <img src={{ url_for('static', filename='uploads/' + row[4]) }} id="itemImage" />
+					  <H5>{{row[1]}}</H5>
+					</div>
+
+					<div class="col col-price col-numeric align-center ">
+					  <p>R$ {{row[2]}}</p>
+					</div>
+
+					<div class="col col-qty layout-inline">
+					  <a href="#" class="qty qty-minus">-</a>
+						<input type="numeric" value="1" />
+					  <a href="#" class="qty qty-plus">+</a>
+					</div>
+					<div class="col col-total col-numeric">
+					<a href="/productDescription?productId={{row[0]}}" class="btn btn-update">Adiciona</a>
+					</div>
+				  </div>
+			  {% endfor %}
+		  {% endfor %}
+		 </div>
+		</div>
+	  </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>
+

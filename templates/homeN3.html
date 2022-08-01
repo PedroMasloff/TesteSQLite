@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>BiCandi</title>
+<link rel="stylesheet" href={{ url_for('static', filename='css/home3.css') }} />
+<link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css') }} />
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="title">
+	<form>
+		<input id="searchBox"  type="text" name="searchQuery">
+		<input id="searchButton"  type="submit" value="Buscar">
+	</form>
+
+	{% if not loggedIn %}
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Login</a>
+	</div>
+	{% else %}
+	<div class="dropdown">
+		<button class="dropbtn">Alô, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Seu Pedido</a>
+			<a href="/account/profile">Seu Cadastro</a>
+			<hr>
+			<a href="/logout">Sair</a>
+		</div>
+	</div>
+	{% endif %}
+	<div id="kart">
+		<a class="link" href="/cart">
+			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+			CART {{noOfItems}}
+		</a>
+	</div>
+</div>
+<div class="display">
+	<div class="displayCategory">
+		<h2>Filtra por Categoria: </h2>
+		<ul>
+			{% for row in categoryData %}
+			<li><a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div>
+		<h2>Produtos</h2>
+		<div class="container">
+            {% for data in itemData %}
+                {% for row in data %}
+					<div class="card">
+						<div class="box">
+						  <div class="content">
+							<div class="card-header">
+								<img src={{ url_for('static', filename='uploads/' + row[4]) }} id="itemImage" alt="rover"/>
+							</div>
+							<h3>{{row[1]}}</h3>
+							<p>Feito com muito amor</p>
+							<h3>R$ {{row[2]}}</h3>
+							<a href="/productDescription?productId={{row[0]}}">Comprar</a>
+						  </div>
+						</div>
+					  </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>
+

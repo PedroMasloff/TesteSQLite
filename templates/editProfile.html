@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Cadastro </title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+<link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css') }} />
+
+</head>
+<body>
+<div id="title">
+	<form>
+		<input id="searchBox" type="text" name="searchQuery">
+		<input id="searchButton" type="submit" value="Search">
+	</form>
+
+	{% if not loggedIn %}
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Sign In</a>
+	</div>
+	{% else %}
+	<div class="dropdown">
+		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Seu Pedido</a>
+			<a href="/account/profile">Seu Cadastro</a>
+			<hr>
+			<a href="/logout">Sair</a>
+		</div>
+	</div>
+	{% endif %}
+	<div id="kart">
+		<a class="link" href="/cart">
+			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+			CART {{noOfItems}}
+		</a>
+	</div>
+</div>
+
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Altera Cadastro</h3>
+	<form action="/updateProfile" method="POST">
+		<div class="field">
+			<label class="label">E-Mail</label>
+			<div class="control">
+				<input class="input is-large" type="email" name="email" value={{profileData[0]}} readonly="readonly" >
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label">Nome</label>
+			<div class="control">
+				<input class="input is-large" type="text" name="nome" value={{profileData[1]}}  >
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label">CPF</label>
+			<div class="control">
+				<input class="input is-large" type="text" name="cpf" value={{profileData[2]}}  >
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label">Logradouro</label>
+			<div class="control">
+				<input class="input is-large" type="text" name="logradouro" value={{profileData[3]}}  >
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label">Endereco</label>
+			<div class="control">
+				<input class="input is-large" type="text" name="endereco" value={{profileData[4]}}  >
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label">Número</label>
+			<div class="control">
+				<input class="input is-large" type="text" name="numero" value={{profileData[5]}}  >
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label">Complemento</label>
+			<div class="control">
+				<input class="input is-large" type="text" name="complemento" value={{profileData[6]}}  >
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label">CEP</label>
+			<div class="control">
+				<input class="input is-large" type="text" name="cep" value={{profileData[7]}}  >
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label">Cidade</label>
+			<div class="control">
+				<input class="input is-large" type="text" name="cidade" value={{profileData[8]}}  >
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label">Estado</label>
+			<div class="control">
+				<input class="input is-large" type="text" name="estado" value={{profileData[9]}}  >
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label">DDD</label>
+			<div class="control">
+				<input class="input is-large" type="text" name="ddd" value={{profileData[10]}}  >
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label">Telefone</label>
+			<div class="control">
+				<input class="input is-large" type="text" name="telefone" value={{profileData[11]}}  >
+			</div>
+		</div>
+		<button class="button is-block is-info is-large is-fullwidth">Altera</button>
+
+	</form>
+</div>
+</body>
+</html>
+

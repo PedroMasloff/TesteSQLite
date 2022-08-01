@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>Sign up</title>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/validateForm.js') }}" </script></script>
+</head>
+<body>
+<form action="/register" method="POST" onsubmit="return validate()">
+    <p>Email: <input type="email" name="email"></p>
+
+    <P>Senha: <input type="password" name="password" id="password" required></p>
+
+    <p>Confirme Senha: <input type="password" name="cpassword" id="cpassword"></p>
+
+    <p>Nome: <input type="text" name="nome"></p>
+    <p>CPF: <input type="text" name="cpf"></p>
+    <p>Logradouro: <input type="text" name="logradouro"></p>
+    <p>Endereco: <input type="text" name="endereco"></p>
+    <p>Número: <input type="text" name="numero"></p>
+    <p>Complemento: <input type="text" name="complemento"></p>
+    <p>CEP: <input type="text" name="cep"></p>
+    <p>Cidade: <input type="text" name="cidade"></p>
+    <p>Estado: <input type="text" name="estado"></p>
+    <p>DDD: <input type="text" name="ddd"></p>
+    <p>Telefone: <input type="text" name="telefone"></p>
+
+    <p><input type="submit" value="Confirme"></p>
+
+    <a href="/loginForm">Login</a>
+</form>
+</body>
+</html>
+
+
+
